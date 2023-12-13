@@ -1,7 +1,62 @@
 <div class="container p-3">
   <div class="card">
     <div class="card-body">
-      <h3>Products Component</h3>
+      <h3 class="mb-2">Products list</h3>
+      <app-dashboard/>
+      <div class="p-2">
+        <div class="card">
+          <div class="card-body">
+            <input class="p-1" type="text" [(ngModel)]="this.appState.productsState.keyword">
+            <button (click)="getProducts()" class="btn btn-outline-success ms-1">
+              <i class="bi bi-search"></i>
+            </button>
+          </div>
+          <table class="table my-2">
+            <thead>
+            <tr>
+              <th></th><th>Name</th><th>Price</th><th>Checked</th><th></th><th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let product of this.appState.productsState.products">
+              <td>{{product.id}}</td>
+              <td>{{product.name}}</td>
+              <td>{{product.price}}</td>
+              <td>
+                <button (click)="handleCheckProduct(product)"
+                        class="btn btn-outline-success">
+
+                  <i [class]="product.checked?'bi bi-check-circle':'bi bi-circle'" ></i>
+                </button>
+              </td>
+              <td>
+                <button (click)="handleEdit(product)"
+                        class="btn btn-outline-info">
+
+                  <i class="bi bi-pencil" ></i>
+                </button>
+              </td>
+              <td>
+                <button (click)="handleDelete(product)"
+                        class="btn btn-outline-danger">
+
+                  <i class="bi bi-trash" ></i>
+                </button>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+          <nav aria-label="Page navigation example">
+            <ul class="pagination">
+              <li class="page-item" *ngFor="let page of [].constructor(this.appState.productsState.totalPages); let i=index">
+                <a class="page-link btn cursor-pointer" (click)="handleGoToPage(i+1)" [ngClass]="{'active': i+1 === this.appState.productsState.currentPage}">
+                  {{i+1}}
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
     </div>
   </div>
 </div>

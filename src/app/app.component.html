@@ -7,31 +7,19 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/home" routerLinkActive="active" aria-current="page">
-            <i class="bi bi-box"></i> Home
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/products" routerLinkActive="active" aria-current="page">
-            <i class="bi bi-person"></i> Products
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/new-product" routerLinkActive="active" aria-current="page">
-            <i class="bi bi-person"></i> New Product
-          </a>
+      <ul class="nav-pills navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item" *ngFor="let action of actions">
+          <button
+            (click)="setCurrentAction(action)"
+            routerLink="{{action.route}}"
+            [class]="action==currentAction
+        ?'btn btn-success ms-1 nav-link' : 'btn btn-outline-success ms-1 nav-link'"
+          >
+            {{action.title}}
+            <i class="bi bi-{{action.icon}}"></i>
+          </button>
         </li>
       </ul>
-      <form class="d-flex">
-        <div class="input-group">
-          <input class="form-control" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">
-            <i class="bi bi-search"></i> Search
-          </button>
-        </div>
-      </form>
     </div>
   </div>
 </nav>
